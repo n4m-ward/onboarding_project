@@ -1,7 +1,6 @@
 <?php
 
 namespace Onboarding\tests\Adders;
-require_once "vendor/autoload.php";
 
 use Onboarding\Adders\MultipleNumbersAdder;
 use PHPUnit\Framework\TestCase;
