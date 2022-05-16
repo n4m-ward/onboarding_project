@@ -9,5 +9,16 @@
         "platform": {
             "php": "8.1.1"
         }
+    },
+    "autoload": {
+        "psr-4": {
+            "Onboarding\\": "app/",
+            "Onboarding\\Tests\\": "tests/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
     }
 }

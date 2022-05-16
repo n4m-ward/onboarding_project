@@ -1,5 +1,5 @@
 test:
-	./vendor/bin/phpunit app/tests
+	./vendor/bin/phpunit tests/
 
 validate-stan:
 	./vendor/bin/phpstan analyse app
