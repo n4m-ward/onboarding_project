@@ -20,5 +20,8 @@ jobs:
       - name: Installing dependencies
         run: composer install --ignore-platform-reqs --optimize-autoloader
 
+      - name: Dumping autoload
+        run: composer dumpautoload -o
+
       - name: Iniciando testes..
         run: ./vendor/bin/phpunit ./tests
