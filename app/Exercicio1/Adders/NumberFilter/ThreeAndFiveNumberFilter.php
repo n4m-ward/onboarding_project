@@ -4,6 +4,10 @@ namespace Onboarding\Exercicio1\Adders\NumberFilter;
 
 class ThreeAndFiveNumberFilter extends BaseNumberFilter
 {
+    /**
+     * @param array<int> $arrayToFilter
+     * @return  array<int>
+     */
     public function filterNumbers(array $arrayToFilter): array
     {
         return array_filter($arrayToFilter, function (int $arrayNumber) {

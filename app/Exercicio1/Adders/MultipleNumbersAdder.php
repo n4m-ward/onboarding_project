@@ -27,6 +27,7 @@ class MultipleNumbersAdder
     }
 
     /**
+     * @return  array<int>
      * @throws Exception
      */
     public function getSumOfMultiples(): array
@@ -45,6 +46,7 @@ class MultipleNumbersAdder
 
     /**
      * @throws Exception
+     * @return  array<int>
      */
     private function getArrayInRange(): array
     {

@@ -7,8 +7,12 @@ use Onboarding\Exercicio1\Adders\NumberFilter\BaseNumberFilter;
 class BaseNumberFilterForTest extends BaseNumberFilter
 {
 
-    public function filterNumbers(array $arrayToFilter)
+    /**
+     * @param array<int> $arrayToFilter
+     * @return  array<int>
+     */
+    public function filterNumbers(array $arrayToFilter): array
     {
-        //
+        return [];
     }
 }
