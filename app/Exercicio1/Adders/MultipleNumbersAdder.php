@@ -1,11 +1,11 @@
 <?php
 
-namespace Onboarding\Adders;
+namespace Onboarding\Exercicio1\Adders;
 
 use Exception;
-use Onboarding\Adders\NumberFilter\ThreeAndFiveNumberFilter;
-use Onboarding\Adders\NumberFilter\ThreeOrFiveAndSevenNumberFilter;
-use Onboarding\Adders\NumberFilter\ThreeOrFiveNumberFilter;
+use Onboarding\Exercicio1\Adders\NumberFilter\ThreeAndFiveNumberFilter;
+use Onboarding\Exercicio1\Adders\NumberFilter\ThreeOrFiveAndSevenNumberFilter;
+use Onboarding\Exercicio1\Adders\NumberFilter\ThreeOrFiveNumberFilter;
 
 class MultipleNumbersAdder
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Onboarding\Adders\NumberFilter;
+namespace Onboarding\Exercicio1\Adders\NumberFilter;
 
 class ThreeOrFiveNumberFilter extends BaseNumberFilter
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\Adders\NumberFilter;
+namespace tests\Exercicio1\Adders\NumberFilter;
 
 use PHPUnit\Framework\TestCase;
 

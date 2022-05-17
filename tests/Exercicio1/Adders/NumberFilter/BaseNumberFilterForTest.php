@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\Adders\NumberFilter;
+namespace tests\Exercicio1\Adders\NumberFilter;
 
-use Onboarding\Adders\NumberFilter\BaseNumberFilter;
+use Onboarding\Exercicio1\Adders\NumberFilter\BaseNumberFilter;
 
 class BaseNumberFilterForTest extends BaseNumberFilter
 {

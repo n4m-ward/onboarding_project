@@ -1,9 +1,9 @@
 <?php
 
-namespace tests\Adders;
+namespace tests\Exercicio1\Adders;
 
 use Exception;
-use Onboarding\Adders\MultipleNumbersAdder;
+use Onboarding\Exercicio1\Adders\MultipleNumbersAdder;
 use PHPUnit\Framework\TestCase;
 
 class MultipleNumbersAdderTest extends TestCase

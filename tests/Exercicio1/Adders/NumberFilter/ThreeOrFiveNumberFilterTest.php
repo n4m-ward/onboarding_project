@@ -1,8 +1,8 @@
 <?php
 
-namespace tests\Adders\NumberFilter;
+namespace tests\Exercicio1\Adders\NumberFilter;
 
-use Onboarding\Adders\NumberFilter\ThreeOrFiveNumberFilter;
+use Onboarding\Exercicio1\Adders\NumberFilter\ThreeOrFiveNumberFilter;
 use PHPUnit\Framework\TestCase;
 
 class ThreeOrFiveNumberFilterTest extends TestCase
