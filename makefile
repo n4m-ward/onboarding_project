@@ -1,8 +1,8 @@
 test:
-	./vendor/bin/phpunit app/tests
+	./vendor/bin/phpunit tests/
 
 validate-stan:
-	./vendor/bin/phpstan analyse app
+	./vendor/bin/phpstan analyse -l 6 app tests
 
 validate-phpcs:
-	./vendor/bin/php-cs-fixer fix app
+	./vendor/bin/php-cs-fixer fix app -v --dry-run
