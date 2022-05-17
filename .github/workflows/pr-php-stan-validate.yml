@@ -19,4 +19,4 @@ jobs:
       - name: Installing dependencies
         run: composer install
       - name: Running sniffer PSR12
-        run: ./vendor/bin/phpstan analyse app
+        run: make validate-stan

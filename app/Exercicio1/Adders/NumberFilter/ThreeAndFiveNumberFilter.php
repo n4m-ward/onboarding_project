@@ -6,7 +6,7 @@ class ThreeAndFiveNumberFilter extends BaseNumberFilter
 {
     public function filterNumbers(array $arrayToFilter): array
     {
-        return array_filter($arrayToFilter, function ($arrayNumber) {
+        return array_filter($arrayToFilter, function (int $arrayNumber) {
             $numberIsMultipleOfThree = $this->numberIsMultiple(number: $arrayNumber, multiple: 3);
             $numberIsMultipleOfFive = $this->numberIsMultiple(number: $arrayNumber, multiple: 5);
 
