@@ -2,24 +2,61 @@
 
 namespace Onboarding\Adders;
 
+use Exception;
+use Onboarding\Adders\NumberFilter\ThreeAndFiveNumberFilter;
+use Onboarding\Adders\NumberFilter\ThreeOrFiveAndSevenNumberFilter;
+use Onboarding\Adders\NumberFilter\ThreeOrFiveNumberFilter;
+
 class MultipleNumbersAdder
 {
-    public function getSumOfMultiplesInRange($min, $max): array
+    private int $initialValueInArray;
+    private int $finalValueInArray;
+
+    private const NUMBER_FILTER = [
+        'multipleOfThreeOrFive' => ThreeOrFiveNumberFilter::class,
+        'multipleOfThreeAndFive' => ThreeAndFiveNumberFilter::class,
+        'multipleOfThreeOrFiveAndSeven' => ThreeOrFiveAndSevenNumberFilter::class,
+    ];
+
+    public function setRange(int $initialValue, int $finalValue): MultipleNumbersAdder
     {
-        $arrayInRangeTo1000 = range($min, $max -1);
-        $result = array_filter($arrayInRangeTo1000, function($number) {
-            $numberIsMultipleOfThree = $this->numberIsMultiple(number: $number, multiple: 3);
-            $numberIsMultipleOfFive = $this->numberIsMultiple(number: $number, multiple: 5);
+        $this->initialValueInArray = $initialValue;
+        $this->finalValueInArray = $finalValue -1;
 
-            return $numberIsMultipleOfThree
-                || $numberIsMultipleOfFive;
-        });
-
-        return ['multipleOfThreeAndFive' => array_sum($result)];
+        return $this;
     }
 
-    private function numberIsMultiple(int $number, int $multiple): bool
+    /**
+     * @throws Exception
+     */
+    public function getSumOfMultiples(): array
     {
-        return $number % $multiple == 0;
+        $arrayWithAllSum = [];
+        $filledArray = $this->getArrayInRange();
+
+        foreach (self::NUMBER_FILTER as $numberSumMethod => $numberFilterClass) {
+            $numberFilterInstance = new $numberFilterClass();
+            $arrayWithFilteredNumbers = $numberFilterInstance->filterNumbers($filledArray);
+            $arrayWithAllSum[$numberSumMethod] = array_sum($arrayWithFilteredNumbers);
+        }
+
+        return $arrayWithAllSum;
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function getArrayInRange(): array
+    {
+        $minimumOrMaxValueIsNull = in_array(
+            null,
+            [$this->initialValueInArray, $this->finalValueInArray]
+        );
+
+        if ($minimumOrMaxValueIsNull) {
+            throw new Exception('Por favor use o metodo setRange() antes do metodo getSumOfMultiples()');
+        }
+
+        return range(start: $this->initialValueInArray, end: $this->finalValueInArray);
     }
 }

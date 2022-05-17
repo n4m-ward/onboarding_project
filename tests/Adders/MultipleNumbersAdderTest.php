@@ -1,7 +1,8 @@
 <?php
 
-namespace Onboarding\tests\Adders;
+namespace tests\Adders;
 
+use Exception;
 use Onboarding\Adders\MultipleNumbersAdder;
 use PHPUnit\Framework\TestCase;
 
@@ -15,11 +16,42 @@ class MultipleNumbersAdderTest extends TestCase
         $this->multipleNumberAdder = new MultipleNumbersAdder();
     }
 
-    public function testGetNumbersMultipleOfThreeAndFiveBringsCorrectResult(): void
+    /**
+     * @throws Exception
+     */
+    public function testMultipleOfThreeOrFiveWorksInRangeOneThousand(): void
     {
-        $expectedResult = 23;
-        $resultOfSum = $this->multipleNumberAdder->getSumOfMultiplesInRange(1, 10);
+        $expectedResult = 233168;
+        $resultOfSum = $this->multipleNumberAdder
+            ->setRange(initialValue: 1, finalValue: 1000)
+            ->getSumOfMultiples();
+
+        $this->assertEquals($expectedResult, $resultOfSum['multipleOfThreeOrFive']);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testMultipleOfThreeAndFiveWorksInRangeOneThousand(): void
+    {
+        $expectedResult = 33165;
+        $resultOfSum = $this->multipleNumberAdder
+            ->setRange(initialValue: 1, finalValue: 1000)
+            ->getSumOfMultiples();
 
         $this->assertEquals($expectedResult, $resultOfSum['multipleOfThreeAndFive']);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function testMultipleOfThreeOrFiveAndSevenWorksInRangeOneThousand(): void
+    {
+        $expectedResult = 33173;
+        $resultOfSum = $this->multipleNumberAdder
+            ->setRange(initialValue: 1, finalValue: 1000)
+            ->getSumOfMultiples();
+
+        $this->assertEquals($expectedResult, $resultOfSum['multipleOfThreeOrFiveAndSeven']);
     }
 }
