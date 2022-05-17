@@ -1,8 +1,11 @@
 <?php
 
+namespace tests\Exercicio2;
 
 use Onboarding\Exercicio2\HappyNumberService;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
+use ReflectionException;
 
 class HappyNumberServiceTest extends TestCase
 {
@@ -30,9 +33,7 @@ class HappyNumberServiceTest extends TestCase
         $this->assertFalse($isAnHappyNumber);
     }
 
-    /**
-     * @throws ReflectionException
-     */
+
     public function testsquareAndSumEachDigitOfNumberBringsCorrectResultForTwoDigitsNumber(): void
     {
         $expectedResult = 8;
@@ -79,9 +80,13 @@ class HappyNumberServiceTest extends TestCase
     }
 
     /**
+     * @param HappyNumberService $object
+     * @param string $methodName
+     * @param array<int> $arguments
+     * @return mixed
      * @throws ReflectionException
      */
-    function invokeNonPublicProperty($object, $methodName, array $arguments = [])
+    function invokeNonPublicProperty(HappyNumberService $object, string $methodName, array $arguments = []): mixed
     {
         $class = new ReflectionClass($object);
         $method = $class->getMethod($methodName);
