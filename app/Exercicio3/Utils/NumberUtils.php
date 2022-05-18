@@ -14,10 +14,6 @@ class NumberUtils
     )
     {}
 
-    /**
-     * @param int $number
-     * @return bool
-     */
     public function isAnPrimeNumber(int $number): bool
     {
         for ($i = 2; $i < $number; $i++) {
@@ -32,10 +28,6 @@ class NumberUtils
         return true;
     }
 
-    /**
-     * @param int $number
-     * @return bool
-     */
     public function numberIsMultipleOfThreeOrFive(int $number): bool
     {
         return $this->threeOrFiveNumberFilter->numberIsMultiple(number: $number, multiple: 3)

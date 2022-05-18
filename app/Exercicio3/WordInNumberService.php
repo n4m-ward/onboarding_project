@@ -11,10 +11,6 @@ use Onboarding\Exercicio3\ValueObjects\Word;
 
 class WordInNumberService
 {
-    /**
-     * @param HappyNumberService $happyNumberService
-     * @param NumberUtils $numberUtils
-     */
     public function __construct(
         public HappyNumberService $happyNumberService,
         public NumberUtils $numberUtils,
@@ -51,8 +47,6 @@ class WordInNumberService
     ];
 
     /**
-     * @param string $letter
-     * @return int
      * @throws Exception
      */
     public function getLetterValue(string $letter): int
@@ -74,8 +68,6 @@ class WordInNumberService
     }
 
     /**
-     * @param string $letter
-     * @return Letter
      * @throws Exception
      */
     public function getLetterInfos(string $letter): Letter
@@ -92,7 +84,6 @@ class WordInNumberService
     }
 
     /**
-     * @param string $word
      * @return array<Letter>
      * @throws Exception
      */
@@ -109,8 +100,6 @@ class WordInNumberService
     }
 
     /**
-     * @param string $word
-     * @return Word
      * @throws Exception
      */
     public function getWordInfo(string $word): Word
@@ -126,7 +115,6 @@ class WordInNumberService
 
     /**
      * @param array<Letter> $letters
-     * @return int
      */
     public function getWordTotalValueByLettersArray(array $letters): int
     {

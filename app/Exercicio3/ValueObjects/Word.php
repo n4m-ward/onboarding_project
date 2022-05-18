@@ -5,8 +5,6 @@ namespace Onboarding\Exercicio3\ValueObjects;
 class Word
 {
     /**
-     * @param string $word
-     * @param int $totalWordValue
      * @param array<Letter> $letters
      */
     public function __construct(

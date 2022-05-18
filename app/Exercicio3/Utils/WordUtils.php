@@ -19,10 +19,6 @@ class WordUtils
         "/(Ñ)/"
     ];
 
-    /**
-     * @param string $letter
-     * @return bool
-     */
     public static function isAnUppercaseLetter(string $letter): bool
     {
         $letterUpperCase = strtoupper($letter);
@@ -30,10 +26,6 @@ class WordUtils
         return $letter == $letterUpperCase;
     }
 
-    /**
-     * @param string $text
-     * @return string
-     */
     public static function removeUnwantedCharacters(string $text): string
     {
         $textWithoutAccents = self::removeWordAccents(word: $text);
@@ -41,10 +33,6 @@ class WordUtils
         return preg_replace('/[^a-zA-Z]/i', '', $textWithoutAccents);
     }
 
-    /**
-     * @param string $word
-     * @return string
-     */
     public static function removeWordAccents(string $word): string
     {
         return preg_replace(
