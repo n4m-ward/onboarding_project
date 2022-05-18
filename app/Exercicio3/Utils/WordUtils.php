@@ -26,14 +26,14 @@ class WordUtils
         return $letter == $letterUpperCase;
     }
 
-    public static function removeUnwantedCharacters(string $text): string
+    public static function removeUnwantedCharacters(string $text): ?string
     {
         $textWithoutAccents = self::removeWordAccents(word: $text);
 
         return preg_replace('/[^a-zA-Z]/i', '', $textWithoutAccents);
     }
 
-    public static function removeWordAccents(string $word): string
+    public static function removeWordAccents(string $word): ?string
     {
         return preg_replace(
             self::WORD_TO_REPLACE_ACENTS,
