@@ -1,4 +1,4 @@
-name: pr-php-stan-validate
+name: pr-phpcs-validate
 on:
   pull_request:
 
