@@ -1,29 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Onboarding\Exercicio3\Utils;
 
-class WordUtils
+final class WordUtils
 {
     private const WORD_TO_REPLACE_ACENTS = [
-        "/(á|à|ã|â|ä)/",
-        "/(Á|À|Ã|Â|Ä)/",
-        "/(é|è|ê|ë)/",
-        "/(É|È|Ê|Ë)/",
-        "/(í|ì|î|ï)/",
-        "/(Í|Ì|Î|Ï)/",
-        "/(ó|ò|õ|ô|ö)/",
-        "/(Ó|Ò|Õ|Ô|Ö)/",
-        "/(ú|ù|û|ü)/",
-        "/(Ú|Ù|Û|Ü)/",
-        "/(ñ)/",
-        "/(Ñ)/"
+        '/(á|à|ã|â|ä)/',
+        '/(Á|À|Ã|Â|Ä)/',
+        '/(é|è|ê|ë)/',
+        '/(É|È|Ê|Ë)/',
+        '/(í|ì|î|ï)/',
+        '/(Í|Ì|Î|Ï)/',
+        '/(ó|ò|õ|ô|ö)/',
+        '/(Ó|Ò|Õ|Ô|Ö)/',
+        '/(ú|ù|û|ü)/',
+        '/(Ú|Ù|Û|Ü)/',
+        '/(ñ)/',
+        '/(Ñ)/',
     ];
 
     public static function isAnUppercaseLetter(string $letter): bool
     {
         $letterUpperCase = strtoupper($letter);
 
-        return $letter == $letterUpperCase;
+        return $letter === $letterUpperCase;
     }
 
     public static function removeUnwantedCharacters(string $text): ?string
@@ -37,7 +39,7 @@ class WordUtils
     {
         $wordWithoutAccent = preg_replace(
             self::WORD_TO_REPLACE_ACENTS,
-            explode(" ", "a A e E i I o O u U n N"),
+            explode(' ', 'a A e E i I o O u U n N'),
             $word
         );
 

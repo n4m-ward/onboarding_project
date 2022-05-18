@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Onboarding\Exercicio3\ValueObjects;
 
-class Word
+final class Word
 {
     /**
      * @param array<Letter> $letters
@@ -10,7 +12,7 @@ class Word
     public function __construct(
         public readonly string $word,
         public readonly int $totalWordValue,
-        public readonly array  $letters,
+        public readonly array $letters,
     ) {
     }
 }
