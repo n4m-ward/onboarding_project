@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Onboarding\Exercicio3\ValueObjects;
 
-class Letter
+final class Letter
 {
     public function __construct(
         public readonly string $letter,
-        public readonly int    $letterNumber,
-        public readonly bool   $isAnHappyNumber,
-        public readonly bool   $isAnPrimeNumber,
-        public readonly bool   $isMultipleOfThreeOrFive,
+        public readonly int $letterNumber,
+        public readonly bool $isAnHappyNumber,
+        public readonly bool $isAnPrimeNumber,
+        public readonly bool $isMultipleOfThreeOrFive,
     ) {
     }
 }

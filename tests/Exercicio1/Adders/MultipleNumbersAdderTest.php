@@ -13,7 +13,10 @@ class MultipleNumbersAdderTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->multipleNumberAdder = new MultipleNumbersAdder();
+        $this->multipleNumberAdder = new MultipleNumbersAdder(
+            initialValueInArray: 1,
+            finalValueInArray: 1000
+        );
     }
 
     /**
@@ -23,7 +26,6 @@ class MultipleNumbersAdderTest extends TestCase
     {
         $expectedResult = 233168;
         $resultOfSum = $this->multipleNumberAdder
-            ->setRange(initialValue: 1, finalValue: 1000)
             ->getSumOfMultiples();
 
         $this->assertEquals($expectedResult, $resultOfSum['multipleOfThreeOrFive']);
@@ -36,7 +38,6 @@ class MultipleNumbersAdderTest extends TestCase
     {
         $expectedResult = 33165;
         $resultOfSum = $this->multipleNumberAdder
-            ->setRange(initialValue: 1, finalValue: 1000)
             ->getSumOfMultiples();
 
         $this->assertEquals($expectedResult, $resultOfSum['multipleOfThreeAndFive']);
@@ -49,7 +50,6 @@ class MultipleNumbersAdderTest extends TestCase
     {
         $expectedResult = 33173;
         $resultOfSum = $this->multipleNumberAdder
-            ->setRange(initialValue: 1, finalValue: 1000)
             ->getSumOfMultiples();
 
         $this->assertEquals($expectedResult, $resultOfSum['multipleOfThreeOrFiveAndSeven']);

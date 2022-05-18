@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Onboarding\Exercicio3;
 
 use Exception;
@@ -9,14 +11,8 @@ use Onboarding\Exercicio3\Utils\WordUtils;
 use Onboarding\Exercicio3\ValueObjects\Letter;
 use Onboarding\Exercicio3\ValueObjects\Word;
 
-class WordInNumberService
+final class WordInNumberService
 {
-    public function __construct(
-        public HappyNumberService $happyNumberService,
-        public NumberUtils $numberUtils,
-    ) {
-    }
-
     public const LETTER_VALUE_MAPPING = [
         'a' => 1,
         'b' => 2,
@@ -46,6 +42,12 @@ class WordInNumberService
         'z' => 26,
     ];
 
+    public function __construct(
+        public HappyNumberService $happyNumberService,
+        public NumberUtils $numberUtils,
+    ) {
+    }
+
     /**
      * @throws Exception
      */
@@ -73,18 +75,25 @@ class WordInNumberService
     public function getLetterInfos(string $letter): Letter
     {
         $letterNumber = $this->getLetterValue($letter);
+        $isAnHappyNumber = $this->happyNumberService
+            ->isAnHappyNumber($letterNumber);
+        $isAnPrimeNumber = $this->numberUtils
+            ->isAnPrimeNumber($letterNumber);
+        $numberIsMultipleOfThreeOrFive = $this->numberUtils
+            ->numberIsMultipleOfThreeOrFive($letterNumber);
 
         return new Letter(
             letter: $letter,
             letterNumber: $letterNumber,
-            isAnHappyNumber: $this->happyNumberService->isAnHappyNumber($letterNumber),
-            isAnPrimeNumber: $this->numberUtils->isAnPrimeNumber($letterNumber),
-            isMultipleOfThreeOrFive: $this->numberUtils->numberIsMultipleOfThreeOrFive($letterNumber),
+            isAnHappyNumber: $isAnHappyNumber,
+            isAnPrimeNumber: $isAnPrimeNumber,
+            isMultipleOfThreeOrFive: $numberIsMultipleOfThreeOrFive,
         );
     }
 
     /**
      * @return array<Letter>
+     *
      * @throws Exception
      */
     public function getWordLettersInfoInArray(string $word): array
@@ -105,10 +114,12 @@ class WordInNumberService
     public function getWordInfo(string $word): Word
     {
         $letterArray = $this->getWordLettersInfoInArray(word: $word);
+        $wordTotalValue = $this
+            ->getWordTotalValueByLettersArray(letters: $letterArray);
 
         return new Word(
             word: $word,
-            totalWordValue: $this->getWordTotalValueByLettersArray(letters: $letterArray),
+            totalWordValue: $wordTotalValue,
             letters: $letterArray,
         );
     }

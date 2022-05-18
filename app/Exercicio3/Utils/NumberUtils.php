@@ -1,14 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Onboarding\Exercicio3\Utils;
 
 use Onboarding\Exercicio1\Adders\NumberFilter\ThreeOrFiveNumberFilter;
 
-class NumberUtils
+final class NumberUtils
 {
-    /**
-     * @param ThreeOrFiveNumberFilter $threeOrFiveNumberFilter
-     */
     public function __construct(
         private readonly ThreeOrFiveNumberFilter $threeOrFiveNumberFilter
     ) {
@@ -30,7 +29,12 @@ class NumberUtils
 
     public function numberIsMultipleOfThreeOrFive(int $number): bool
     {
-        return $this->threeOrFiveNumberFilter->numberIsMultiple(number: $number, multiple: 3)
-        || $this->threeOrFiveNumberFilter->numberIsMultiple(number: $number, multiple: 5);
+        $numberIsMultipleOfThree = $this->threeOrFiveNumberFilter
+            ->numberIsMultiple(number: $number, multiple: 3);
+        $numberIsMultipleOfFive = $this->threeOrFiveNumberFilter
+            ->numberIsMultiple(number: $number, multiple: 5);
+
+        return $numberIsMultipleOfThree
+        || $numberIsMultipleOfFive;
     }
 }
