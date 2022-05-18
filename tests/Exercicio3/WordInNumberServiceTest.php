@@ -143,7 +143,8 @@ class WordInNumberServiceTest extends TestCase
     {
         $expectedResult = 4;
         $lettersArrayMock = [
-            new Letter(letter: 'a',
+            new Letter(
+                letter: 'a',
                 letterNumber: 2,
                 isAnHappyNumber: true,
                 isAnPrimeNumber: false,

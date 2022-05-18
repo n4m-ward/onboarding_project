@@ -6,3 +6,6 @@ validate-stan:
 
 validate-phpcs:
 	./vendor/bin/php-cs-fixer fix app -v --dry-run
+
+insight:
+    ./vendor/bin/phpinsights
