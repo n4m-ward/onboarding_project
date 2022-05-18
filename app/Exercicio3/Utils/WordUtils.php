@@ -33,12 +33,14 @@ class WordUtils
         return preg_replace('/[^a-zA-Z]/i', '', $textWithoutAccents);
     }
 
-    public static function removeWordAccents(string $word): ?string
+    public static function removeWordAccents(string $word): string
     {
-        return preg_replace(
+        $wordWithoutAccent = preg_replace(
             self::WORD_TO_REPLACE_ACENTS,
             explode(" ", "a A e E i I o O u U n N"),
             $word
         );
+
+        return $wordWithoutAccent ?? '';
     }
 }
