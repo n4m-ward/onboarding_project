@@ -11,8 +11,8 @@ class NumberUtils
      */
     public function __construct(
         private readonly ThreeOrFiveNumberFilter $threeOrFiveNumberFilter
-    )
-    {}
+    ) {
+    }
 
     public function isAnPrimeNumber(int $number): bool
     {

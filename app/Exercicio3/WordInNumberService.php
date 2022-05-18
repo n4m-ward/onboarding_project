@@ -14,8 +14,8 @@ class WordInNumberService
     public function __construct(
         public HappyNumberService $happyNumberService,
         public NumberUtils $numberUtils,
-    )
-    {}
+    ) {
+    }
 
     public const LETTER_VALUE_MAPPING = [
         'a' => 1,
@@ -55,7 +55,7 @@ class WordInNumberService
         $letterValue = self::LETTER_VALUE_MAPPING[strtolower($letter)] ?? null;
 
         if (is_null($letterValue)) {
-           throw new Exception('Por favor use apenas letras de a ~ Z');
+            throw new Exception('Por favor use apenas letras de a ~ Z');
         }
 
         if ($isAnUpperCaseLetter) {

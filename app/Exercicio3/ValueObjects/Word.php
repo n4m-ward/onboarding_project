@@ -11,5 +11,6 @@ class Word
         public readonly string $word,
         public readonly int $totalWordValue,
         public readonly array  $letters,
-    ) {}
+    ) {
+    }
 }

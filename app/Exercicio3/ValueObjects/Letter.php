@@ -10,7 +10,6 @@ class Letter
         public readonly bool   $isAnHappyNumber,
         public readonly bool   $isAnPrimeNumber,
         public readonly bool   $isMultipleOfThreeOrFive,
-    )
-    {
+    ) {
     }
 }
