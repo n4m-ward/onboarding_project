@@ -1,5 +1,7 @@
 <?php
+
 namespace Onboarding\Exercicio4\Dto;
+
 use Onboarding\Exercicio4\Interfaces\Dto;
 
 class BaseDto implements Dto

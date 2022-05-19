@@ -4,7 +4,7 @@ namespace Onboarding\Exercicio4\Dto;
 
 use Tightenco\Collect\Support\Collection;
 
-class CarrinhoDto extends BaseDto
+class CarrinhoDto extends BaseTableDto
 {
     public int $usuarioId;
 

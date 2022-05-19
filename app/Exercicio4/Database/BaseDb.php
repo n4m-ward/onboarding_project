@@ -4,9 +4,9 @@ namespace Onboarding\Exercicio4\Database;
 
 use Exception;
 use Onboarding\Exercicio4\Dto\BaseDto;
+use Onboarding\Exercicio4\Dto\BaseTableDto;
 use Onboarding\Exercicio4\Dto\WhereDto;
 use Onboarding\Exercicio4\Interfaces\DbInterface;
-use Onboarding\Exercicio4\Interfaces\Dto;
 use Tightenco\Collect\Support\Collection;
 
 class BaseDb implements DbInterface
@@ -20,6 +20,9 @@ class BaseDb implements DbInterface
      */
     public array $wheres;
 
+    /**
+     * @return Collection<BaseTableDto>
+     */
     public function getAll(): Collection
     {
         $modelPath = $this->getModelPath();
@@ -36,7 +39,7 @@ class BaseDb implements DbInterface
     /**
      * @throws Exception
      */
-    public function insert(Dto $tableDto): Dto
+    public function insert(BaseTableDto $tableDto): BaseTableDto
     {
         $this->checkCorrectDto($tableDto);
         $tableDto->attachValues(['id' => $this->getNewId()]);
@@ -52,7 +55,7 @@ class BaseDb implements DbInterface
     /**
      * @throws Exception
      */
-    public function update(Dto $tableDto): Dto
+    public function update(BaseTableDto $tableDto): BaseTableDto
     {
         $this->checkCorrectDto($tableDto);
         $this->checkWheres();
@@ -60,7 +63,7 @@ class BaseDb implements DbInterface
         $itemToUpdate = $this->getSingleItemByWheres();
         $itemId = $itemToUpdate->id;
         $tableDto->attachValues(['id' => $itemId]);
-        $allItemUpdated = $allItems->transform(function (Dto $item) use ($itemId, $tableDto) {
+        $allItemUpdated = $allItems->transform(function (BaseTableDto $item) use ($tableDto) {
             if ($item->id === $tableDto->id) {
                 return $tableDto;
             }
@@ -82,14 +85,14 @@ class BaseDb implements DbInterface
         $allItems = $this->getAll();
         $itemToUpdate = $this->getSingleItemByWheres();
         $itemId = $itemToUpdate->id;
-        $allItemUpdated = $allItems->filter(function (Dto $item) use ($itemId) {
+        $allItemUpdated = $allItems->filter(function (BaseTableDto $item) use ($itemId) {
             return $item->id != $itemId;
         });
         $this->clearWheres();
         $this->saveContent($allItemUpdated);
     }
 
-    private function getSingleItemByWheres(): Dto
+    private function getSingleItemByWheres(): BaseTableDto
     {
         $itemToUpdate = $this->getAll();
         foreach ($this->wheres as $where) {
@@ -101,10 +104,11 @@ class BaseDb implements DbInterface
 
     private function saveContent(Collection $content): void
     {
-        $contentJson = json_encode($content);
+        $contentJson = (string) json_encode($content);
         $model = $this->getModelPath();
 
         $fp = fopen($model, "w+");
+
         fwrite($fp, $contentJson);
         fclose($fp);
     }
@@ -114,7 +118,7 @@ class BaseDb implements DbInterface
         return __DIR__ . '/Models/' . $this->table . self::FILE_SULFIX;
     }
 
-    private function getDto(): Dto
+    private function getDto(): BaseTableDto
     {
         return new $this->dtoClass();
     }
@@ -126,32 +130,33 @@ class BaseDb implements DbInterface
                 ->first()
                 ->id ?? null;
 
-        return is_null($contentId) ? 1 : $contentId +1;
+        return is_null($contentId) ? 1 : $contentId + 1;
     }
 
     public function where(string $column, string $symbol, string|int|bool $value): static
     {
-        $this->wheres[] = (new WhereDto())
-            ->attachValues([
-                'column' => $column,
-                'symbol' => $symbol,
-                'value' => $value,
-            ]);
+        $whereDto = new WhereDto();
+        $whereDto->attachValues([
+            'column' => $column,
+            'symbol' => $symbol,
+            'value' => $value,
+        ]);
+        $this->wheres[] = $whereDto;
 
         return $this;
     }
 
     /**
-     * @param Dto $dto
+     * @param BaseTableDto $dto
      * @return void
      * @throws Exception
      */
-    private function checkCorrectDto(Dto $dto): void
+    private function checkCorrectDto(BaseTableDto $dto): void
     {
         $dtoClass = get_class($dto);
         $isCorrectDto = $dtoClass === $this->dtoClass;
 
-        if(!$isCorrectDto) {
+        if (!$isCorrectDto) {
             throw new Exception("Por favor use o dto: {$this->dtoClass}");
         }
     }
@@ -162,8 +167,8 @@ class BaseDb implements DbInterface
      */
     private function checkWheres(): void
     {
-        if(empty($this->wheres)) {
-           throw new Exception("impossivel usar a clausula sem antes usar where");
+        if (empty($this->wheres)) {
+            throw new Exception("impossivel usar a clausula sem antes usar where");
         }
     }
 

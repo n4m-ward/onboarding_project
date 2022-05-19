@@ -2,7 +2,7 @@
 
 namespace Onboarding\Exercicio4\Dto;
 
-class ProdutoDto extends BaseDto
+class ProdutoDto extends BaseTableDto
 {
     public string $nome;
     public string $valor;
