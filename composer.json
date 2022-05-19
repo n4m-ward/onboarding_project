@@ -24,5 +24,8 @@
         "classmap": [
             "tests/"
         ]
+    },
+    "require": {
+        "tightenco/collect": "^9.12"
     }
 }
