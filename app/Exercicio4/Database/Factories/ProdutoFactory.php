@@ -4,11 +4,11 @@ namespace Onboarding\Exercicio4\Database\Factories;
 
 use Faker\Generator;
 use Onboarding\Exercicio4\Database\ProductDb;
-use Onboarding\Exercicio4\Dto\ProdutoDto;
+use Onboarding\Exercicio4\Dto\ProductDto;
 
 class ProdutoFactory extends BaseFactory
 {
-    public string $dtoClass = ProdutoDto::class;
+    public string $dtoClass = ProductDto::class;
     public string $dbClass = ProductDb::class;
 
     protected function make(Generator $faker): array

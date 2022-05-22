@@ -7,12 +7,12 @@ use Faker\Generator;
 use Onboarding\Exercicio4\Database\CartDb;
 use Onboarding\Exercicio4\Database\ProductDb;
 use Onboarding\Exercicio4\Database\UserDb;
-use Onboarding\Exercicio4\Dto\CarrinhoDto;
+use Onboarding\Exercicio4\Dto\CartDto;
 use Onboarding\Exercicio4\Dto\ProdutoQuantityDto;
 
 class CarrinhoFactory extends BaseFactory
 {
-    public string $dtoClass = CarrinhoDto::class;
+    public string $dtoClass = CartDto::class;
     public string $dbClass = CartDb::class;
 
     /**

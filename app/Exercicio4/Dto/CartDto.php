@@ -2,7 +2,7 @@
 
 namespace Onboarding\Exercicio4\Dto;
 
-class CarrinhoDto extends BaseTableDto
+class CartDto extends BaseTableDto
 {
     public int $userId;
 

@@ -4,9 +4,9 @@ namespace tests\Exercicio4\TestUtils;
 class DbTransaction
 {
     private const ALL_DATABASES = [
-        'carrinho',
-        'produto',
-        'usuario',
+        'cart',
+        'product',
+        'user',
     ];
     private const FILE_SULFIX = '.json';
 
