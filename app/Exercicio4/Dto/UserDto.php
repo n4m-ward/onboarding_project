@@ -2,9 +2,9 @@
 
 namespace Onboarding\Exercicio4\Dto;
 
-class UsuarioDto extends BaseTableDto
+class UserDto extends BaseTableDto
 {
     public int $id;
-    public string $nome;
+    public string $name;
     public string $cep;
 }

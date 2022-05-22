@@ -3,7 +3,7 @@
 namespace Onboarding\Exercicio4\Database;
 
 use Exception;
-use Onboarding\Exercicio4\Dto\BaseDto;
+use Onboarding\Exercicio4\Database\Factories\BaseFactory;
 use Onboarding\Exercicio4\Dto\BaseTableDto;
 use Onboarding\Exercicio4\Dto\WhereDto;
 use Onboarding\Exercicio4\Interfaces\DbInterface;
@@ -13,7 +13,8 @@ class BaseDb implements DbInterface
 {
     public const FILE_SULFIX = '.json';
     public string $table = '';
-    public string $dtoClass = BaseDto::class;
+    public string $dtoClass = '';
+    public string $factoryClass = '';
 
     /**
      * @var array<WhereDto>
@@ -43,8 +44,7 @@ class BaseDb implements DbInterface
     {
         $this->checkCorrectDto($tableDto);
         $tableDto->attachValues(['id' => $this->getNewId()]);
-        $collectionWithNewData = $this
-            ->getAll()
+        $collectionWithNewData = self::getAll()
             ->push($tableDto);
 
         $this->saveContent($collectionWithNewData);
@@ -130,7 +130,9 @@ class BaseDb implements DbInterface
                 ->first()
                 ->id ?? null;
 
-        return is_null($contentId) ? 1 : $contentId + 1;
+        return is_null($contentId)
+            ? 1
+            : $contentId + 1;
     }
 
     public function where(string $column, string $symbol, string|int|bool $value): static
@@ -175,5 +177,29 @@ class BaseDb implements DbInterface
     private function clearWheres(): void
     {
         $this->wheres = [];
+    }
+
+    /**
+     * @param int $quantity
+     * @param array<mixed> $params
+     * @return BaseTableDto|Collection
+     * @throws Exception
+     */
+    public function factory(int $quantity = 1, array $params = []): BaseTableDto|Collection
+    {
+        return $this->getFactoryInstance()
+            ->factory($quantity, $params);
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function getFactoryInstance(): BaseFactory
+    {
+        if (empty($this->factoryClass)) {
+            throw new Exception('essa classe não possui uma factory');
+        }
+
+        return new $this->factoryClass();
     }
 }

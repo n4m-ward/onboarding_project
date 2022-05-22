@@ -26,6 +26,7 @@
         ]
     },
     "require": {
-        "tightenco/collect": "^9.12"
+        "tightenco/collect": "^9.12",
+        "fakerphp/faker": "^1.19"
     }
 }
