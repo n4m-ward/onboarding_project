@@ -24,16 +24,15 @@ class BaseDb implements DbInterface
     /**
      * @return Collection<BaseTableDto>
      */
-    public static function getAll(): Collection
+    public function getAll(): Collection
     {
-        $self = new static();
-        $modelPath = $self->getModelPath();
+        $modelPath = $this->getModelPath();
         $tableContentJson = (string) file_get_contents($modelPath);
         $tableContentArray = json_decode($tableContentJson, true);
 
         return collect($tableContentArray)
-            ->transform(function (array $arrayItem) use ($self) {
-                return $self->getDto()
+            ->transform(function (array $arrayItem)  {
+                return $this->getDto()
                     ->attachValues($arrayItem);
             });
     }
@@ -41,15 +40,14 @@ class BaseDb implements DbInterface
     /**
      * @throws Exception
      */
-    public static function insert(BaseTableDto $tableDto): BaseTableDto
+    public function insert(BaseTableDto $tableDto): BaseTableDto
     {
-        $self = new static();
-        $self->checkCorrectDto($tableDto);
-        $tableDto->attachValues(['id' => $self->getNewId()]);
+        $this->checkCorrectDto($tableDto);
+        $tableDto->attachValues(['id' => $this->getNewId()]);
         $collectionWithNewData = self::getAll()
             ->push($tableDto);
 
-        $self->saveContent($collectionWithNewData);
+        $this->saveContent($collectionWithNewData);
 
         return $tableDto;
     }
@@ -184,11 +182,9 @@ class BaseDb implements DbInterface
     /**
      * @throws Exception
      */
-    public static function factory(int $quantity = 1, array $params = []): BaseTableDto|Collection
+    public function factory(int $quantity = 1, array $params = []): BaseTableDto|Collection
     {
-        $self = new static;
-
-        return $self->getFactoryInstance()
+        return $this->getFactoryInstance()
             ->factory($quantity, $params);
     }
 
@@ -202,10 +198,5 @@ class BaseDb implements DbInterface
         }
 
         return new $this->factoryClass();
-    }
-
-    public static function query(): static
-    {
-        return new static();
     }
 }

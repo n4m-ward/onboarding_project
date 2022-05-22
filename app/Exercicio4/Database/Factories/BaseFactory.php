@@ -14,6 +14,10 @@ abstract class BaseFactory
     public string $dtoClass = '';
     public string $dbClass = '';
 
+    /**
+     * @param Generator $faker
+     * @return array<mixed>
+     */
     abstract protected function make(Generator $faker): array;
 
     /**
