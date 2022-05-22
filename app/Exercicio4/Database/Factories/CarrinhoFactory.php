@@ -20,7 +20,8 @@ class CarrinhoFactory extends BaseFactory
      */
     protected function make(Generator $faker): array
     {
-        $produtoQuantity = (new ProdutoQuantityDto())
+        $productQuantityDto = new ProdutoQuantityDto();
+        $produtoQuantity = $productQuantityDto
             ->attachValues([
                 'product' => (new ProductDb())->factory(),
                 'quantity' => $faker->numberBetween(1, 10)

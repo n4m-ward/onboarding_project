@@ -22,7 +22,7 @@ abstract class BaseFactory
 
     /**
      * @param int $quantity
-     * @param array $params
+     * @param array<mixed> $params
      * @return BaseTableDto|Collection
      * @throws Exception
      */

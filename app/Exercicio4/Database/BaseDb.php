@@ -180,6 +180,9 @@ class BaseDb implements DbInterface
     }
 
     /**
+     * @param int $quantity
+     * @param array<mixed> $params
+     * @return BaseTableDto|Collection
      * @throws Exception
      */
     public function factory(int $quantity = 1, array $params = []): BaseTableDto|Collection
