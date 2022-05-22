@@ -125,17 +125,35 @@ class CartRepository
      */
     private function getProductsThatDoesNotExistsInCart(array $products, array $cart): array
     {
-        $arrayGroupedByRepeatedProducts = [];
-        $productsThatDoesNotExistInCart = array_filter($products, function (ProductDto $product) use ($cart) {
+        $productsThatDoesNotExistInCart = $this
+            ->filterByProductsNonExistentInCart($products, $cart);
+
+        return $this->groupProductsByQuantity($productsThatDoesNotExistInCart);
+    }
+
+    /**
+     * @param array<ProductDto> $products
+     * @param array<ProdutoQuantityDto> $cart
+     * @return array<ProductDto>
+     */
+    private function filterByProductsNonExistentInCart(array $products, array $cart): array
+    {
+        return array_filter($products, function (ProductDto $product) use ($cart) {
             $productQuantity = $this->getProductQuantityInCart($product, $cart);
             $productQuantityExist = !empty($productQuantity);
 
             return !$productQuantityExist;
         });
-        foreach ($productsThatDoesNotExistInCart as $product) {
-            $arrayGroupedByRepeatedProducts[$product->name][] = $product;
-        }
+    }
 
+
+    /**
+     * @param array<ProductDto> $productsArray
+     * @return array<ProdutoQuantityDto>
+     */
+    private function groupProductsByQuantity(array $productsArray): array
+    {
+        $productsGroupedByEquals = $this->getProductGroupedByEquals($productsArray);
         return array_map(
             function (array $groupedProducts) {
                 $product = $groupedProducts[0];
@@ -147,7 +165,7 @@ class CartRepository
 
                 return $productQuantityDto;
             },
-            $arrayGroupedByRepeatedProducts
+            $productsGroupedByEquals
         );
     }
 
@@ -166,5 +184,15 @@ class CartRepository
         (new CartDb())
             ->where('id', '=', $cartId)
             ->update($cart);
+    }
+
+    private function getProductGroupedByEquals(array $productsArray): array
+    {
+        $arrayGroupedByRepeatedProducts = [];
+        foreach ($productsArray as $product) {
+            $arrayGroupedByRepeatedProducts[$product->name][] = $product;
+        }
+
+        return $arrayGroupedByRepeatedProducts;
     }
 }
