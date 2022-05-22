@@ -38,10 +38,10 @@ abstract class BaseFactory
             ->attachValues($factoryFake);
         $allFactories = [];
 
-        if($quantity === 1) {
+        if ($quantity === 1) {
             return $this->getDb()->insert($dto);
         }
-        for($i = 0; $i < $quantity; $i++) {
+        for ($i = 0; $i < $quantity; $i++) {
             $allFactories[] = $this->getDb()->insert($dto);
         }
 

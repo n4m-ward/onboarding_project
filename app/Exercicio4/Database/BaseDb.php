@@ -31,7 +31,7 @@ class BaseDb implements DbInterface
         $tableContentArray = json_decode($tableContentJson, true);
 
         return collect($tableContentArray)
-            ->transform(function (array $arrayItem)  {
+            ->transform(function (array $arrayItem) {
                 return $this->getDto()
                     ->attachValues($arrayItem);
             });
@@ -196,7 +196,7 @@ class BaseDb implements DbInterface
      */
     private function getFactoryInstance(): BaseFactory
     {
-        if(empty($this->factoryClass)) {
+        if (empty($this->factoryClass)) {
             throw new Exception('essa classe não possui uma factory');
         }
 
