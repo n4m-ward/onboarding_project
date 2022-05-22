@@ -7,8 +7,9 @@ use Tightenco\Collect\Support\Collection;
 
 interface DbInterface
 {
-    public function getAll(): Collection;
-    public function insert(BaseTableDto $tableDto): BaseTableDto;
+    public static function getAll(): Collection;
+    public static function insert(BaseTableDto $tableDto): BaseTableDto;
+    public static function query(): static;
     public function where(string $column, string $symbol, string|int|bool $value): static;
     public function delete(): void;
     public function update(BaseTableDto $tableDto): BaseTableDto;

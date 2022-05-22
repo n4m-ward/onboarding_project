@@ -2,14 +2,13 @@
 
 namespace Onboarding\Exercicio4\Dto;
 
-use Tightenco\Collect\Support\Collection;
 
 class CarrinhoDto extends BaseTableDto
 {
-    public int $usuarioId;
+    public int $userId;
 
     /**
-     * @var Collection
+     * @var array<ProdutoQuantityDto>
      */
-    public Collection $listaDeCompras;
+    public array $wishList = [];
 }
