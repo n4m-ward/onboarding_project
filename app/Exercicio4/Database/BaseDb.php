@@ -5,6 +5,9 @@ namespace Onboarding\Exercicio4\Database;
 use Exception;
 use Onboarding\Exercicio4\Database\Factories\BaseFactory;
 use Onboarding\Exercicio4\Dto\BaseTableDto;
+use Onboarding\Exercicio4\Dto\CartDto;
+use Onboarding\Exercicio4\Dto\ProductDto;
+use Onboarding\Exercicio4\Dto\UserDto;
 use Onboarding\Exercicio4\Dto\WhereDto;
 use Onboarding\Exercicio4\Interfaces\DbInterface;
 use Tightenco\Collect\Support\Collection;
@@ -182,10 +185,10 @@ class BaseDb implements DbInterface
     /**
      * @param int $quantity
      * @param array<mixed> $params
-     * @return BaseTableDto|Collection
+     * @return Collection|ProductDto|CartDto|UserDto
      * @throws Exception
      */
-    public function factory(int $quantity = 1, array $params = []): BaseTableDto|Collection
+    public function factory(int $quantity = 1, array $params = []): Collection|ProductDto|CartDto|UserDto
     {
         return $this->getFactoryInstance()
             ->factory($quantity, $params);
