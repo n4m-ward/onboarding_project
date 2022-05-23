@@ -188,7 +188,7 @@ class CartRepository
 
     /**
      * @param array<ProductDto> $productsArray
-     * @return array<ProductDto>
+     * @return array<string, array<int,ProductDto>>
      */
     private function getProductsGroupedByEquals(array $productsArray): array
     {
