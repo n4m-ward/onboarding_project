@@ -153,7 +153,7 @@ class CartRepository
      */
     private function groupProductsByQuantity(array $productsArray): array
     {
-        $productsGroupedByEquals = $this->getProductGroupedByEquals($productsArray);
+        $productsGroupedByEquals = $this->getProductsGroupedByEquals($productsArray);
         return array_map(
             function (array $groupedProducts) {
                 $product = $groupedProducts[0];
@@ -186,7 +186,11 @@ class CartRepository
             ->update($cart);
     }
 
-    private function getProductGroupedByEquals(array $productsArray): array
+    /**
+     * @param array<ProductDto> $productsArray
+     * @return array<ProductDto>
+     */
+    private function getProductsGroupedByEquals(array $productsArray): array
     {
         $arrayGroupedByRepeatedProducts = [];
         foreach ($productsArray as $product) {
